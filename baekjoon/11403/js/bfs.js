@@ -13,7 +13,7 @@ function parseInput(inputBuffer) {
 	};
 }
 
-function hasPath(from, to, nrRow, graph) {
+function hasPath(from, to, graph) {
 	var found = 0;
 	var hit = [];
 	var queue = [];
@@ -55,7 +55,7 @@ process.stdin.on('data', function (inputBuffer) {
 	for (var i=0; i<input.nrRow; i++) {
 		var result = [];
 		for (var j=0; j<input.nrRow; j++) {
-			result.push(hasPath(i, j, input.nrRow, input.graph));
+			result.push(hasPath(i, j, input.graph));
 		}
 		console.log(result.join(' '));
 	}
