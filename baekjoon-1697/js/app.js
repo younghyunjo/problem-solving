@@ -9,7 +9,6 @@ function parseInput(inputBuffer) {
 
 function bfs(from, to) {
   var hits = [];
-  var movablePoint = [];// = {from-1,from+1, from*2};
 
   if (from === to)
     return 0;
@@ -22,6 +21,7 @@ function bfs(from, to) {
     var nextPoints = movablePoint.slice();
     if (nextPoints.indexOf(to) !== -1)
       break;
+    movablePoint = [];
 
     cnt++;
 
@@ -29,17 +29,19 @@ function bfs(from, to) {
       hits[nextPoints[i]] = 1;
     }
 
-    movablePoint = [];
 
     for (i=0; i<nextPoints.length; i++) {
-      p =nextPoints[i];
-      if (movablePoint.indexOf(p-1) === -1 && hits[p-1] === undefined && p < 100000) {
+      p = nextPoints[i];
+      if (p > 1000000) {
+        continue;
+      }
+      if (movablePoint.indexOf(p-1) === -1 && hits[p-1] === undefined) {
         movablePoint.push(p-1);
       }
-      if (movablePoint.indexOf(p+1) === -1 && hits[p+1] === undefined && p < 100000) {
+      if (movablePoint.indexOf(p+1) === -1 && hits[p+1] === undefined && p+1 <= 100000) {
         movablePoint.push(p+1);
       }
-      if (movablePoint.indexOf(p*2) === -1 && hits[p*2] === undefined && p < 100000) {
+      if (movablePoint.indexOf(p*2) === -1 && hits[p*2] === undefined && p*2 <= 100000) {
         movablePoint.push(p*2);
       }
     }
@@ -58,4 +60,5 @@ process.stdin.on('data', function (inputBuffer) {
 
   console.log(cnt);
 });
+
 
