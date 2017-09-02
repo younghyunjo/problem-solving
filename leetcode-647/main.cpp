@@ -7,32 +7,30 @@ class Solution {
 public:
     int countSubstrings(string s) {
         int count = 0;
+        for (int i=0; i<s.length(); i++) {
+            count += _countSubstring(s, i, i);
+            count += _countSubstring(s, i, i+1);
+        };
 
-        for (int i=0; i<s.length(); i++)
-            for (int j=i; j<s.length(); j++)
-                if (isPalindromicString(s, i, j))
-                    count++;
         return count;
     }
 
 private:
-    bool isPalindromicString(string s, int begin, int end) {
-        if (begin == end)
-            return true;
-
-        for (int i=0; i<(end-begin+1)/2; i++) {
-            if (s[begin + i] != s[end - i])
-                return false;
-        }
-        return true;
+    int _countSubstring(string s, int left, int right) {
+        int count = 0;
+        while (left >= 0 && right < s.length() && s[left] == s[right])
+            count++, left--, right++;
+        return count;
     }
 };
 
 
 int main() {
-    string str("abaabc");
+    string str("aba");
+    string str2("aaa");
     Solution s;
     cout << s.countSubstrings(str) << endl;
+    cout << s.countSubstrings(str2) << endl;
 
     return 0;
 }
