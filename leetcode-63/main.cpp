@@ -9,29 +9,17 @@ public:
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int y = obstacleGrid.size();
         int x = obstacleGrid[0].size();
-        vector<vector<int>> cache(y, vector<int>(x, 0));
+        vector<vector<int>> cache(y+1, vector<int>(x+1, 0));
 
-        for (int i=0; i<y; i++) {
-            if (obstacleGrid[i][0] == 1)
-                break;
-            cache[i][0] = 1;
-        }
+        cache[0][1] = 1;
 
-        for (int j=0; j<x; j++) {
-            if (obstacleGrid[0][j] == 1)
-                break;
-            cache[0][j] = 1;
-        }
-
-        for (int i=1; i<y; i++) {
-            for (int j=1; j<x; j++) {
-                if (obstacleGrid[i][j] == 1)
-                    cache[i][j] = 0;
-                else
+        for (int i=1; i<=y; i++) {
+            for (int j=1; j<=x; j++) {
+                if (obstacleGrid[i-1][j-1] != 1)
                     cache[i][j] = cache[i-1][j] + cache[i][j-1];
             }
         }
-        return cache[y-1][x-1];
+        return cache[y][x];
     }
 };
 
