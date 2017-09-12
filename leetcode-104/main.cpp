@@ -15,30 +15,25 @@ struct TreeNode {
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if (!root)
+        if (!root) {
             return 0;
+        }
 
         int depth = 0;
-        int qIndex = 0;
-        int next = 1;
-        queue<TreeNode*> q[2];
+        queue<TreeNode*> s;
+        s.push(root);
 
-        q[qIndex].push(root);
+        while(!s.empty()) {
+            depth++;
+            int size = s.size();
+            for (int i=0; i<size; i++) {
+                TreeNode* n = s.front();
+                s.pop();
 
-        TreeNode* n;
-        while (!q[qIndex].empty()) {
-            n = q[qIndex].front();
-            q[qIndex].pop();
-
-            if (n->left)
-                q[next].push(n->left);
-            if (n->right)
-                q[next].push(n->right);
-
-            if (q[qIndex].empty()) {
-                depth++;
-                next = (next+1) % 2;
-                qIndex = (qIndex+1) % 2;
+                if (n->left)
+                    s.push(n->left);
+                if (n->right)
+                    s.push(n->right);
             }
         }
         return depth;
