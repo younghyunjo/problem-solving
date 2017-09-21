@@ -29,11 +29,11 @@ private:
     }
 
     bool _isPossibleToPutQueen(int i) {
-        int k=1;
-        while (k<i) {
-            if (board[i] == board[k] || abs(board[i] - board[k]) == abs(i-k))
+        int j=1;
+        while (j<i) {
+            if (board[i] == board[j] || abs(board[i] - board[j]) == abs(i-j))
                 return false;
-            k++;
+            j++;
         }
 
         return true;
