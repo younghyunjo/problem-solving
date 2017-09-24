@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/algospot_quantize.dir/main.cpp.o  -o algospot_quantize 

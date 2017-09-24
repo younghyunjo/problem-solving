@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/younghyun/work/younghyunjo/problem-solving/algospot-quantize/main.cpp
+iostream
+-
+numeric
+-
+limits
+-
+vector
+-
+cstring
+-
+
