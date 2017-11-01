@@ -5,6 +5,8 @@ using namespace std;
 
 int simpleArraySum(int n, vector <int> ar) {
     int sum = 0;
+
+
     for (auto& i :ar) {
         sum += i;
     }
