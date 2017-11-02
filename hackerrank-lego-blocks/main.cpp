@@ -1,41 +1,32 @@
-//https://www.hackerrank.com/challenges/brick-tiling/problem
+//https://www.hackerrank.com/challenges/lego-blocks/problem
 
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-
 #define MODULO 1000000007
 
-long long int pow(long long int a, int p) {
-    long long ans = 1;
-    while(p) {
-        if (p % 2) ans = ans * a % MODULO;
-        a = a * a % MODULO;
-        p /= 2;
+long long int f[1001] = {0,};
+
+long long int pow(long long int x, int y) {
+    long long int ans = 1;
+    while (y--) {
+        ans = (ans * x) % MODULO;
     }
 
     return ans;
 }
 
 long long int solve(int height, int width) {
-    vector<long long int> f(1000+1, 0);
-    f[0] = 1;
-
-    for (int i=1; i<=1000; i++)
-        for (int j=1; j<=4; j++)
-            if (i-j >= 0)
-                f[i] = (f[i] + f[i-j]) % MODULO;
-
-    vector<long long int> g(width+1, 0);
+    long long int g[1001] = {0,};
 
     for (int i=1; i<=width; i++) {
         g[i] = pow(f[i], height);
     }
 
-    vector<long long int> h(width+1, 0);
 
+    int h[width+1] = {0,};
     h[1] = 1;
     for (int i=2; i<=width; i++) {
         h[i] = g[i];
@@ -49,8 +40,16 @@ long long int solve(int height, int width) {
     return h[width];
 }
 
-
 int main() {
+    f[0] = 1;
+    for (int i=1; i<=1000; i++) {
+        for (int j=1; j<=4; j++) {
+            if (i-j >= 0) {
+                f[i] = (f[i] + f[i-j]) % MODULO;
+            }
+        }
+    }
+
     int t;
     for (cin>> t ;t; t--) {
         int n, m;
