@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 vector<int> mandragora;
 
 long long int solve(long long int sum) {
