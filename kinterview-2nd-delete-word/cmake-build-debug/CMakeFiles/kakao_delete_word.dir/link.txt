@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/kakao_delete_word.dir/main.cpp.o  -o kakao_delete_word 
