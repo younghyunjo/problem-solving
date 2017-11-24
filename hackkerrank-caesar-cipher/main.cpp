@@ -2,19 +2,20 @@
 
 using namespace std;
 
-string caesarCipher(string s, int k) {
+#define NUMBER_OF_ALPHABETS 26
 
-    for (char& c : s) {
+string caesarCipher(string s, int k) {
+    for (auto & c : s) {
         if (isupper(c)) {
             c -= 'A';
             c += k;
-            c %= 26;
+            c %= NUMBER_OF_ALPHABETS;
             c += 'A';
         }
         else if (islower(c)) {
             c -= 'a';
             c += k;
-            c %= 26;
+            c %= NUMBER_OF_ALPHABETS;
             c += 'a';
         }
         else
