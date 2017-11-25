@@ -6,20 +6,11 @@ using namespace std;
 
 string caesarCipher(string s, int k) {
     for (auto & c : s) {
-        if (isupper(c)) {
-            c -= 'A';
-            c += k;
-            c %= NUMBER_OF_ALPHABETS;
-            c += 'A';
-        }
-        else if (islower(c)) {
-            c -= 'a';
-            c += k;
-            c %= NUMBER_OF_ALPHABETS;
-            c += 'a';
-        }
-        else
+        if (!isalpha(c))
             continue;
+
+        char offset = isupper(c) ? 'A' : 'a';
+        c = ((c-offset + k) % NUMBER_OF_ALPHABETS) + offset;
     }
 
     return s;
