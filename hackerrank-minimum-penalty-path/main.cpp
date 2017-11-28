@@ -3,8 +3,10 @@
 
 using namespace std;
 
+#define MAX_COST 1024
+
 int minimalPenalty(vector<pair<int, int>>* edges, int from, int to) {
-    bool visited[1001][1024];
+    bool visited[1001][MAX_COST];
     memset(visited, false, sizeof(visited));
 
     queue<pair<int, int>> bfsQueue;
@@ -18,18 +20,21 @@ int minimalPenalty(vector<pair<int, int>>* edges, int from, int to) {
         int cost = a.second;
 
         for (auto b : edges[node]) {
-            if (b.first == node)
+            int nextNode = b.first;
+            int nextCost = b.second;
+
+            if (nextNode== node)
                 continue;
-            int newCost = b.second|cost;
-            if (visited[b.first][newCost])
+            int newCost = nextCost|cost;
+            if (visited[nextNode][newCost])
                 continue;
 
-            visited[b.first][b.second|cost] = true;
-            bfsQueue.push(make_pair(b.first, newCost));
+            visited[nextNode][nextCost|cost] = true;
+            bfsQueue.push(make_pair(nextNode, newCost));
         }
     }
 
-    for (int i=1; i<1024; i++) {
+    for (int i=1; i<MAX_COST; i++) {
         if (visited[to][i])
             return i;
     }
