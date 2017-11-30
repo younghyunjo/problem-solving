@@ -19,6 +19,6 @@ int main() {
     for (auto& o : orders) {
         printf("%d ", o.second);
     }
-
+*
     return 0;
 }
