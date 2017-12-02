@@ -15,12 +15,9 @@ int solve(int n, int k, vector<int>& costs) {
 
     while (divided--) {
         pTemp = accumulate(costs.begin(), costs.begin() + k , 0);
-//        cout << pTemp << endl;
         costs.erase(costs.begin(), costs.begin() + k);
 
         p += (pTemp * x);
-//        cout << p << endl;
-
         x++;
     }
 
