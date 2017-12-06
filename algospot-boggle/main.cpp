@@ -16,22 +16,13 @@ bool hasWord(int x, int y, string s) {
     if (s.empty())
         return true;
 
-    if (hasWord(x-1, y, s))
-        return true;
-    else if (hasWord(x+1, y, s))
-        return true;
-    else if (hasWord(x, y-1, s))
-        return true;
-    else if(hasWord(x, y+1, s))
-        return true;
-    else if (hasWord(x+1, y+1,s))
-        return true;
-    else if (hasWord(x+1, y-1,s))
-        return true;
-    else if (hasWord(x-1, y+1,s))
-        return true;
-    else if (hasWord(x-1, y-1,s))
-        return true;
+    int xStep[] = { -1, -1, -1, 0,  0, 1, 1,  1};
+    int yStep[] = { -1,  0,  1, 1, -1, 0, 1, -1};
+
+    for (int i=0; i<8; i++) {
+        if (hasWord(x + xStep[i], y + yStep[i], s))
+            return true;
+    }
 
     return false;
 }
