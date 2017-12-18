@@ -2,37 +2,22 @@
 
 #include <iostream>
 #include <vector>
-#include <limits>
 
 using namespace std;
 
 class Solution {
-private:
-    vector<int> n;
-    vector<int> dp;
-
-    int _maxSubArray(int index) {
-        if (index >= n.size())
-                return 0;
-
-        if (dp[index] != INT32_MIN)
-            return dp[index];
-
-        int s = n[index];
-        dp[index] = max(s, _maxSubArray(index+1)+ s);
-        return dp[index];
-    }
-
 public:
     int maxSubArray(vector<int>& nums) {
-        n = nums;
-        dp.assign(n.size(), INT32_MIN);
-        int sum = numeric_limits<int>::min();
+        if (nums.size() == 0)
+            return 0;
 
-        for (int i=0; i<n.size(); i++) {
-            sum = max(sum, _maxSubArray(i));
+        int sum = nums[0];
+        int ret = nums[0];
+        for (int i=1; i<nums.size(); i++) {
+            sum = max(nums[i], sum + nums[i]);
+            ret = max(sum, ret);\
         }
-        return sum;
+        return ret;
     }
 };
 
