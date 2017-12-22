@@ -6,7 +6,6 @@ using namespace std;
 
 class Solution {
 private:
-
     vector<vector<int>> dp;
     int n;
     int _minSteps(int written, int clipboard) {
