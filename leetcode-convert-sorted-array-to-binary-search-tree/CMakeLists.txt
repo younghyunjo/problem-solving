@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.9)
+project(leetcode_convert_sorted_array_to_binary_search_tree)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(leetcode_convert_sorted_array_to_binary_search_tree main.cpp)
