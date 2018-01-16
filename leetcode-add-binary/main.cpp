@@ -4,44 +4,27 @@
 
 using namespace std;
 
-#define A2N(x) ((x) - '0')
-#define N2A(x) ((x) + '0')
-
 class Solution {
 public:
     string addBinary(string a, string b) {
-        int length = a.size() > b.size() ? a.size() : b.size();
-
-        reverse(a.begin(), a.end());
-        reverse(b.begin(), b.end());
-
-        a.append(length - a.size(), '0');
-        b.append(length - b.size(), '0');
-
-        string sum;
+        string sum = "";
+        int i = a.size()-1;
+        int j = b.size()-1;
         int carry = 0;
-        int s = 0;
 
-        for (int i=0; i<length; i++) {
-            s = A2N(a[i]) + A2N(b[i]) + carry;
-            if (s == 2) {
-                s = 0;
-                carry = 1;
+
+        while (i >= 0 || j >= 0 || carry) {
+            if (i >= 0) {
+                carry += (a[i--] - '0');
             }
-            else if (s == 3) {
-                s = 1;
-                carry = 1;
+            if (j >= 0) {
+                carry += (b[j--] - '0');
             }
-            else {
-                carry = 0;
-            }
-            sum.push_back(N2A(s));
+
+            sum = char(carry % 2 + '0') + sum;
+            carry = carry / 2;
         }
 
-        if (carry)
-            sum.push_back(N2A(carry));
-
-        reverse(sum.begin(), sum.end());
         return sum;
     }
 };
