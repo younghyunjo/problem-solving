@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stack>
-#include <map>
+#include <unordered_set>
 #include <algorithm>
 #include <strings.h>
 #include <vector>
@@ -8,7 +8,7 @@
 using namespace std;
 
 static int n;
-map<string, int> commuteLog;
+unordered_set<string> commuteLog;
 
 bool commuteLogComp(string a, string b)
 {
@@ -22,7 +22,7 @@ int main() {
     for (int i=0; i<n; i++) {
         cin >> name >> enterence;
         if (enterence == "enter") {
-            commuteLog.insert({name, 0});
+            commuteLog.insert(name);
         }
         else {
             commuteLog.erase(name);
@@ -31,7 +31,7 @@ int main() {
 
     vector<string> test;
     for (auto& x : commuteLog) {
-        test.push_back(x.first);
+        test.push_back(x);
     }
 
     sort(test.begin(), test.end(), commuteLogComp);
