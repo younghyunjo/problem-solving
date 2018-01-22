@@ -20,8 +20,6 @@ private:
                 tree[node] = tree[node*2];
             else
                 tree[node] = tree[node*2+1];
-
-//            tree[node] = min(, );
         }
         return tree[node];
     }
