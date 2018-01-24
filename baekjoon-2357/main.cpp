@@ -15,18 +15,18 @@ int maximumTreeCompare(int a, int b) {
 
 class SegmentTree {
 private:
-    vector<int> array;
+    int n;
     vector<pair<int, int>> tree;
 
-    void init(int node, int arrStart, int arrEnd) {
+    void init(vector<int>& array, int node, int arrStart, int arrEnd) {
         if (arrStart == arrEnd) {
             tree[node].first = array[arrStart];
             tree[node].second = array[arrStart];
         }
         else {
             int arrMid = (arrStart + arrEnd) / 2;
-            init(node*2, arrStart, arrMid);
-            init(node*2+1, arrMid + 1, arrEnd);
+            init(array, node*2, arrStart, arrMid);
+            init(array, node*2+1, arrMid + 1, arrEnd);
             tree[node].first = minimumTreeCompare(tree[node*2].first, tree[node*2+1].first);
             tree[node].second = maximumTreeCompare(tree[node*2].second, tree[node*2+1].second);
         }
@@ -52,16 +52,16 @@ private:
 
 public:
     SegmentTree(vector<int> input) {
-        array = input;
         int h = ceil(log2(input.size()));
         int treeSize = (1 << (h+1));
+        n = input.size();
         tree.assign(treeSize, make_pair(INT32_MAX, 0));
 
-        init(1, 0, array.size()-1);
+        init(input, 1, 0, n-1);
     }
 
     pair<int, int> minMaxValue(int from, int to) {
-        return findValue(1, 0, array.size()-1, from, to);
+        return findValue(1, 0, n-1, from, to);
     }
 
 };
@@ -80,7 +80,6 @@ int main() {
         scanf("%d %d", &a, &b);
         pair<int, int> ret = st.minMaxValue(a-1, b-1);
         printf("%d %d\n", ret.first, ret.second);
-//        printf("%d %d\n", st.minimumValue(a-1, b-1), st.maximumValue(a-1, b-1));
     }
     return 0;
 }
