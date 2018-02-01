@@ -5,24 +5,23 @@
 
 using namespace std;
 
+static int x = [](){std::ios::sync_with_stdio(false);cin.tie(0);return 0;}();
+
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        int i=-1;
+        if (!nums.size())
+            return;
+
+        int i=0;
 
         for (int k=0; k<nums.size(); k++) {
-            if (nums[k] != 0) {
-                if (i != -1) {
-                    nums[i++] = nums[k];
-                    nums[k] = 0;
-                }
-            }
-            else {
-                if (i == -1) {
-                    i = k;
-                }
-            }
+            if (nums[k])
+                nums[i++] = nums[k];
         }
+
+        for (; i<nums.size(); i++)
+            nums[i] = 0;
     }
 };
 
@@ -30,9 +29,9 @@ int main() {
     vector<int> input = {0, 1, 0, 3, 12};
     vector<int> input2 = {2, 1};
     Solution s;
-    s.moveZeroes(input2);
+    s.moveZeroes(input);
 
-    for (auto i : input2)
+    for (auto i : input)
         cout << i <<endl;
 
     return 0;
