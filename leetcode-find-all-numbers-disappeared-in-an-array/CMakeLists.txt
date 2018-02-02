@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.9)
+project(leetcode_find_all_numbers_disappeared_in_an_array)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(leetcode_find_all_numbers_disappeared_in_an_array main.cpp)
