@@ -7,18 +7,17 @@ using namespace std;
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
-        vector<int> totalNumbers;
-        for (int i=0; i<=nums.size(); i++)
-            totalNumbers.push_back(i);
-
-        for (auto i : nums) {
-            totalNumbers[i] = 0;
+        int len = nums.size();
+        for (int i=0; i<len; i++) {
+            int index = abs(nums[i]) -1;
+            nums[index] = nums[index] > 0 ? -nums[index] : nums[index];
         }
 
         vector<int> ret;
-        for (auto i : totalNumbers) {
-            if (i != 0)
-                ret.push_back(i);
+        for (int i=0; i<len; i++) {
+            if (nums[i] > 0) {
+                ret.push_back(i+1);
+            }
         }
         return ret;
     }
