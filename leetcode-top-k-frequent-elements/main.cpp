@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <queue>
 
 using namespace std;
 
@@ -14,18 +15,14 @@ public:
             freq[n]++;
         }
 
-        vector<vector<int>> bucket(nums.size()+1);
+        vector<int>ret;
 
-        for(auto f : freq) {
-            bucket[f.second].push_back(f.first);
-        }
-
-        vector<int> ret;
-        for (int i = bucket.size()-1; i>=0;  i--) {
-            for(auto j : bucket[i]) {
-                ret.push_back(j);
-                if (ret.size() == k)
-                    return ret;
+        priority_queue<pair<int, int>> pq;
+        for (auto it = freq.begin(); it != freq.end(); it++) {
+            pq.push(make_pair(it->second, it->first));
+            if (pq.size() > (int)freq.size() - k) {
+                ret.push_back(pq.top().second);
+                pq.pop();
             }
         }
 
