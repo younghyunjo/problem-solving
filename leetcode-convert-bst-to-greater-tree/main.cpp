@@ -21,36 +21,46 @@ struct TreeNode {
 };
 
 class Solution {
-private::
-    void doConvertBTS(TreeNode* root) {
-        if (root->right) {
-            doConvertBTS(root->right);
-        }
+private:
+    int doConvertBTS(TreeNode* root, int sum) {
+        if (!root)
+            return sum;
 
-        root->val =  root->val + root->right;
-
+        root->val += doConvertBTS(root->right, sum);
+        return doConvertBTS(root->left, root->val);
     }
+
 public:
     TreeNode* convertBST(TreeNode* root) {
         if (!root)
             return NULL;
 
+        doConvertBTS(root, 0);
 
-
-        return NULL;
+        return root;
     }
 };
 
 int main() {
-    TreeNode n5(5);
-    TreeNode n2(2);
-    TreeNode n13(13);
 
-    n5.left = &n2;
-    n5.right = &n13;
+    TreeNode n2(2);
+    TreeNode n0(0);
+    TreeNode n3(3);
+    TreeNode n4(-4);
+    TreeNode n1(1);
+
+    n2.left = &n0;
+    n2.right = &n3;
+    n0.left = &n4;
+    n0.right = &n1;
 
     Solution s;
-    s.convertBST(&n5);
+    TreeNode* ret = s.convertBST(&n2);
+
+
+    cout << ret->left->right->val << endl;
+
+
 
     return 0;
 }
