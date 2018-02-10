@@ -12,7 +12,6 @@ using namespace std;
  * };
  */
 
-
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -56,11 +55,6 @@ int main() {
 
     Solution s;
     TreeNode* ret = s.convertBST(&n2);
-
-
-    cout << ret->left->right->val << endl;
-
-
 
     return 0;
 }
